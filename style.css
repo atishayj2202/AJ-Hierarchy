@@ -1,3 +1,28 @@
-h1, h2 {
-  font-family: Lato;
+h1{
+  font-size :50px;
+  color:Blue;
+}
+body{
+  font-size : 18px;
+  color : white;
+  padding : 0;
+  background-color : blue;
+  margin : 0;
+}
+#main{
+  top : 0;
+  margin : auto;
+  height : 100%;
+  width : 80%;
+  background-color : green;
+}
+#foot{
+  background-color : red;
+  bottom: 0;
+  color : black;
+  position: absolute;
+  width : 80%;
+  font-weight :bold;
+  x-index : 1;
+  margin : auto;
 }
