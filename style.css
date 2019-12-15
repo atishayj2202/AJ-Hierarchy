@@ -1,12 +1,12 @@
 h1{
   font-size :50px;
-  color:Blue;
+  color:black;
 }
 body{
   font-size : 18px;
   color : white;
   padding : 0;
-  background-color : blue;
+  background-color :black;
   margin : 0;
 }
 #main{
@@ -14,10 +14,10 @@ body{
   margin : auto;
   height : 100%;
   width : 80%;
-  background-color : green;
+  background-color : gray;
 }
 #foot{
-  background-color : red;
+  background-color :white;
   bottom: 0;
   color : black;
   position: absolute;
