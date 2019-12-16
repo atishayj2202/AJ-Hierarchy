@@ -1,10 +1,11 @@
 import "./style.css"
 function showsup(){
-  document.getElementById("signin").style.visibility = "hidden";
+  //document.getElementById("signin").style.visibility = "hidden";
   document.getElementById("signin").style.height = 0;
+  document.getElementById("signin").style.width = 0;
   document.getElementById("signin").style.margin = 0;
   document.getElementById("signin").style.overflow = "hidden";
-  document.getElementById("signin").style.clear = true;
+  document.getElementById("signin").style.padding = 0;
   
   document.getElementById("signup").style.visibility = "visible";
 }
