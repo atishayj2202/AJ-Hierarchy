@@ -1,5 +1,5 @@
 import "./style.css"
-var uid;
+var userid;
 function showsup(){
   hidesignin();
   showsignup();
@@ -28,6 +28,7 @@ function showsup(){
           var errorMessage = error.message;
           alert(errorMessage);
         });
+        userid = user.uid;
         hidesignup();
       }
     });
