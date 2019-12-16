@@ -16,9 +16,9 @@ function showsup(){
     const password = signupform["pword-up"].value;
     console.log(email);
     console.log(password);
-    /*auth.createUserWithEmailAndPassword(email, password).then(cred =>{
+    auth.createUserWithEmailAndPassword(email, password).then(cred =>{
       Console.log(cred);
-    })*/
+    })
   });
 }
 function showsin(){
