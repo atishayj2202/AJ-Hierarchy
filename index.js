@@ -87,7 +87,22 @@ function hidesignin(){
 function showsin(){
   showsignin();
   hidesignup();
-  //const signinform = document
+  const signinform = document.querySelector('#signin');
+  signinform.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = signinform["uname-in"].value;
+    const password = signinform["pword-in"].value;
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(function(){
+      hidesignin();
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(errorMessage)
+    });
+  })
 }
 document.getElementById("bin").addEventListener("click", showsup);
 document.getElementById("bup").addEventListener("click", showsin);
