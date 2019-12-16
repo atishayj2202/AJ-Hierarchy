@@ -87,6 +87,9 @@ function hidesignin(){
 function showsin(){
   showsignin();
   hidesignup();
+  if(checker == 1){
+    hidesignin();
+  }
   const signinform = document.querySelector('#sin');
   signinform.addEventListener('submit', (e) => {
     e.preventDefault();
