@@ -27,6 +27,7 @@ h2{
 #foot{
   background-color :white;
   bottom: 0;
+  left: 10%;
   color : black;
   position: fixed;
   width : 80%;
@@ -43,7 +44,7 @@ input[type=text], select, [type=password] {
   border-radius: 4px;
   box-sizing: border-box;
 }
-input[type=submit] {
+input[type=submit], [type=button] {
   width: 100%;
   background-color: black;
   color: white;
@@ -53,7 +54,7 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 }
-input[type=submit]:hover {
+input[type=submit]:hover,[type=button]:hover {
   background-color: rgb(78, 78, 78);
 }
 #signup {
@@ -64,10 +65,10 @@ input[type=submit]:hover {
   height: 50%;
 }
 #signin {
-  left:0%;
   border-radius: 5px;
   background-color: rgba(255,255,255,0.15);
   padding: 10px;
   width: 50%;
   height: 50%;
+  margin-left: 4%;
 }
