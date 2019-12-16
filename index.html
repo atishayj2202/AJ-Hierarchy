@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>AJ-Hierarchy</title>
+    <title>AJ-Hierarchy - Sign In</title>
   </head>
   <body>
     <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
@@ -19,6 +19,8 @@
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const auth = firebase.auth();
     </script>
     <div id = "main">
       <center><h1>AJ Hierarchy Project</h1></center><hr>
