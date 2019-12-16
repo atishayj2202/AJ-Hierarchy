@@ -10,6 +10,7 @@ function showsup(){
     const email = signupform["uname-up"].value;
     const password = signupform["pword-up"].value;
     const dname = signupform["name-up"].value;
+    const memtype = document.getElementById("memt").value;
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -29,6 +30,22 @@ function showsup(){
           alert(errorMessage);
         });
         userid = user.uid;
+        var approval = 0;
+        if(memtype == "member"){
+          approval = 1;
+        }
+        db.collection("Users").doc(user.uid).set({
+            name: user.displayName,
+            id: user.uid,
+            aprove : approval,
+            memberType : memtype, 
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
         hidesignup();
       }
     });
