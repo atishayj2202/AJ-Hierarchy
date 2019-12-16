@@ -87,7 +87,7 @@ function hidesignin(){
 function showsin(){
   showsignin();
   hidesignup();
-  const signinform = document.querySelector('#signin');
+  const signinform = document.querySelector('#sin');
   signinform.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = signinform["uname-in"].value;
