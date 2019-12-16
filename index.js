@@ -35,7 +35,7 @@ function showsup(){
           approval = 1;
         }
         db.collection("Users").doc(user.uid).set({
-            name: user.displayName,
+            Name: dname,
             id: user.uid,
             aprove : approval,
             memberType : memtype, 
