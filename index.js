@@ -1,4 +1,5 @@
 import "./style.css"
+var uid;
 function showsup(){
   hidesignin();
   showsignup();
@@ -8,8 +9,7 @@ function showsup(){
     e.preventDefault();
     const email = signupform["uname-up"].value;
     const password = signupform["pword-up"].value;
-    console.log(email);
-    console.log(password);
+    const dname = signupform["name-up"].value;
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -18,9 +18,29 @@ function showsup(){
       alert(errorMessage);
     }).then(cred => {
       console.log(cred);
-      hidesignup();
+      if(checker() == 1){
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: dname
+        }).then(function(){
+          alert("Hello" + dname);
+        }).catch(function(error){
+          var errorMessage = error.message;
+          alert(errorMessage);
+        });
+        hidesignup();
+      }
     });
   });
+}
+function checker(){
+  var user = firebase.auth().currentUser;
+  if(user != null){
+    return 1;
+  }
+  else{
+    return 0;
+  }
 }
 function showsignin(){
   document.getElementById("signin").style.visibility = "visible";
@@ -46,11 +66,11 @@ function hidesignin(){
   document.getElementById("signin").style.padding = 0;
   document.getElementById("signin").style.margin = 0;   
 }
-/*function showsin(){
+function showsin(){
   showsignin();
   hidesignup();
-  const signinform = document
-}*/
+  //const signinform = document
+}
 document.getElementById("bin").addEventListener("click", showsup);
 document.getElementById("bup").addEventListener("click", showsin);
 
