@@ -16,9 +16,12 @@ function showsup(){
     const password = signupform["pword-up"].value;
     console.log(email);
     console.log(password);
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
-      console.log(cred)
-    })
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    });
   });
 }
 function showsin(){
