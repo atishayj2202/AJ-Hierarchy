@@ -17,7 +17,7 @@ function showsup(){
     console.log(email);
     console.log(password);
     auth.createUserWithEmailAndPassword(email, password).then(cred =>{
-      Console.log(cred);
+      console.log(cred);
     })
   });
 }
