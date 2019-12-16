@@ -23,7 +23,7 @@ function showsup(){
         user.updateProfile({
           displayName: dname
         }).then(function(){
-          alert("Hello" + dname);
+          alert("Hello " + user.displayName);
         }).catch(function(error){
           var errorMessage = error.message;
           alert(errorMessage);
