@@ -16,8 +16,8 @@ function showsup(){
     const password = signupform["pword-up"].value;
     console.log(email);
     console.log(password);
-    auth.createUserWithEmailAndPassword(email, password).then(cred =>{
-      console.log(cred);
+    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+      console.log(cred)
     })
   });
 }
