@@ -11,7 +11,8 @@ body{
   padding : 0;
   background-color :black;
   margin : 0;
-  scroll-behavior: none;
+  overflow: hidden;
+  height: 100%;
 }
 #main{
   top : 0;
