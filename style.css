@@ -71,6 +71,7 @@ input[type=submit]:hover,button:hover {
   width: 50%;
   height: auto;
   margin: auto;
+  visibility: visible;
 }
 
 #signup {
@@ -80,4 +81,5 @@ input[type=submit]:hover,button:hover {
   width: 50%;
   height: auto;
   margin: auto;
+  visibility: hidden;
 }
