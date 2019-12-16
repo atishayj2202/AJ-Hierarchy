@@ -10,8 +10,10 @@ function showsup(){
 function showsin(){
   document.getElementById("signup").style.visibility = "hidden";
   document.getElementById("signin").style.visibility = "visible";
-  document.getElementById("signin").style.height = auto;
+  document.getElementById("signin").style.height = "auto";
   document.getElementById("signin").style.padding = 10;
+  document.getElementById("signin").style.margin = "auto";
+  
 }
 document.getElementById("bin").addEventListener("click", showsup);
 document.getElementById("bup").addEventListener("click", showsin);
