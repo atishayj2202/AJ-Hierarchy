@@ -114,10 +114,12 @@ signinform.addEventListener('submit', (e) => {
 function showafterin(){
   hidesignin();
   hidesignup();
+  console.log("Closed Everyting")
   var user = firebase.auth().currentUser;
   userid = user.uid;
   console.log(userid);
-  document.getElementById("last").style.visibility == "visible";
+  document.getElementById("last").style.visibility = "visible";
+
 }
 
 document.getElementById("bin").addEventListener("click", showsup);
