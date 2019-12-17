@@ -4,6 +4,7 @@ var userid;
 function showsup(){
   hidesignin();
   showsignup();
+  hideafterin();
   //signup
   const signupform = document.querySelector('#sup');
   signupform.addEventListener('submit', (e)=>{
@@ -54,6 +55,9 @@ function showsup(){
     });
   });
 }
+function hideafterin(){
+  document.getElementById("last").style.visibility = "hidden";
+}
 function checker(){
   var user = firebase.auth().currentUser;
   if(user != null){
@@ -90,9 +94,7 @@ function hidesignin(){
 function showsin(){
   showsignin();
   hidesignup();
-  if(checker == 1){
-    hidesignin();
-  }
+  hideafterin();
   
 }
 const signinform = document.querySelector('#sin');
@@ -123,10 +125,15 @@ function showafterin(){
     if(doc.exists){
       if (doc.data().memberType == "member"){
         document.getElementById("in-explain").innerHTML = "You are Member.";
-        document.getElementById("top").innerHTML = doc.data().Name;
-        document.getElementById("userid").innerHTML = doc.data().id;
-        
+        document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
+        document.getElementById("userid").innerHTML = "User Id : " + doc.data().id;
       }
+      /*else if(doc.data().memberType == "super"){
+        document.getElementById("in-explain").innerHTML = "You are Super Admin.";
+        document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
+        document.getElementById("userid").innerHTML = "Approve :-<br>" + doc.data().Name + "<br>";
+      }*/
+      
     }
     else("Wrong Directory");
   }).catch(function(error){
