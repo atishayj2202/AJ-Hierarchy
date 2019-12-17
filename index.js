@@ -44,6 +44,7 @@ function showsup(){
         })
         .then(function() {
             console.log("Document successfully written!");
+            showafterin();
         })
         .catch(function(error) {
             console.error("Error writing document: ", error);
@@ -133,9 +134,23 @@ function showafterin(){
         document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
         document.getElementById("userid").innerHTML = "Approve :-<br>" + doc.data().Name + "<br>";
       }*/
-      
+      else if (doc.data().memberType == "admin"){
+        if(doc.data().aprove == 1){
+          document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
+        }
+        else if(doc.data().aprove == 0){
+          document.getElementById("in-explain").innerHTML = "You are Admin(Unpproved).";
+        }
+        else{
+          alert("Error");
+        }
+        document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
+        document.getElementById("userid").innerHTML = "User Id : " + doc.data().id;
+      }
     }
-    else("Wrong Directory");
+    else{
+      console.log("Wrong Directory");
+    };
   }).catch(function(error){
     alert(error);
   })
