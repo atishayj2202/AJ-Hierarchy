@@ -41,22 +41,23 @@ function showsup(){
             id: user.uid,
             aprove : approval,
             memberType : memtype, 
-        })
-        var cnt;
-        db.collection("Users").doc("super").get().then(function(doc){
-          if(doc.exists){
-            cnt = doc.data().No;
-            cnt++
-            db.collection("Users").doc("super").set({
-              No = cnt,
-              cnt :[dname, id]
-            })
-          }
-          else{
-            console.log("Directory not Found")
-          }
-        })
-        .then(function() {
+        }).then(function() {
+            if(approval == 0){
+              var cnt;
+              db.collection("Users").doc("super").get().then(function(doc){
+                if(doc.exists){
+                  cnt = doc.data().No;
+                  cnt++;
+                  db.collection("Users").doc("super").set({
+                    No = cnt,
+                    cnt :[dname, id]
+                  })
+                }
+                else{
+                  console.log("Directory not Found")
+                }
+              })
+            }
             console.log("Document successfully written!");
             showafterin();
         })
