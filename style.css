@@ -48,11 +48,11 @@ h2{
   visibility: visible;
 }
 #allow{
-  width: 50%;
+  width: 49%;
   background-color: green;
 }
 #deny{
-  width: 50%;
+  width: 49%;
   background-color: red;
 }
 input[type=text], select, [type=password] {

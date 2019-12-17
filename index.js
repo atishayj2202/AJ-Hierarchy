@@ -119,6 +119,19 @@ function showafterin(){
   userid = user.uid;
   console.log(userid);
   document.getElementById("last").style.visibility = "visible";
+  db.collection("Users").doc(userid).get().then(function(doc){
+    if(doc.exists){
+      if (doc.data().memberType == "member"){
+        document.getElementById("in-explain").innerHTML = "You are Member.";
+        document.getElementById("top").innerHTML = doc.data().Name;
+        document.getElementById("userid").innerHTML = doc.data().id;
+        
+      }
+    }
+    else("Wrong Directory");
+  }).catch(function(error){
+    alert(error);
+  })
 
 }
 
