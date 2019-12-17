@@ -102,6 +102,8 @@ signinform.addEventListener('submit', (e) => {
   console.log(email + '  ' + password);
   firebase.auth().signInWithEmailAndPassword(email, password).then(cred => {
     console.log(cred);
+    userid = user.uid;
+    console.log(userid);
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -109,8 +111,6 @@ signinform.addEventListener('submit', (e) => {
     alert(errorMessage)
   });
   if(checker() == 1){
-    userid = user.uid;
-    console.log(userid);
     hidesignin();
   }
 })
