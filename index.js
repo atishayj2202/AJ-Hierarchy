@@ -95,11 +95,10 @@ function showsin(){
     e.preventDefault();
     const email = signinform["uname-in"].value;
     const password = signinform["pword-in"].value;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(function(){
-      hidesignin();
-    })
-    .catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(email, password).then(cred => {
+      console.log(cred);
+      hidesignin;
+    }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
