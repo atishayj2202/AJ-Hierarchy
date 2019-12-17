@@ -1,13 +1,6 @@
 import "./style.css"
 var userid;
-function siout(){
-  console.log("In Out");
-  firebase.auth().signOut().then(function() {
-    console.log("Out");
-  }).catch(function(error) {
-    alert(error.message);
-  });
-}
+
 function showsup(){
   hidesignin();
   showsignup();
@@ -101,6 +94,13 @@ function showsin(){
     hidesignin();
   }
   
+}
+var auth = firebase.auth();
+function siout(){
+  console.log("In Out");
+  auth.signOut().then(()=>{
+    console.log("You are signOut");
+  })
 }
 const signinform = document.querySelector('#sin');
 signinform.addEventListener('submit', (e) => {
