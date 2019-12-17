@@ -95,13 +95,6 @@ function showsin(){
   }
   
 }
-var auth = firebase.auth();
-function siout(){
-  console.log("In Out");
-  auth.signOut().then(()=>{
-    console.log("You are signOut");
-  })
-}
 const signinform = document.querySelector('#sin');
 signinform.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -110,6 +103,7 @@ signinform.addEventListener('submit', (e) => {
   const password = signinform["pword-in"].value;
   firebase.auth().signInWithEmailAndPassword(email, password).then(cred => {
     console.log(cred);
+    showafterin();
   }).catch(function(error) {
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -118,6 +112,8 @@ signinform.addEventListener('submit', (e) => {
 })
 
 function showafterin(){
+  hidesignin();
+  hidesignup();
   var user = firebase.auth().currentUser;
   userid = user.uid;
   console.log(userid);
@@ -126,5 +122,3 @@ function showafterin(){
 
 document.getElementById("bin").addEventListener("click", showsup);
 document.getElementById("bup").addEventListener("click", showsin);
-
-document.getElementById("main").addEventListener("load", siout());
