@@ -47,6 +47,14 @@ h2{
   margin: auto;
   visibility: visible;
 }
+#allow{
+  width: 50%;
+  background-color: green;
+}
+#deny{
+  width: 50%;
+  background-color: red;
+}
 input[type=text], select, [type=password] {
   width: 100%;
   padding: 12px 20px;
