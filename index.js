@@ -42,6 +42,20 @@ function showsup(){
             aprove : approval,
             memberType : memtype, 
         })
+        var cnt;
+        db.collection("Users").doc("super").get().then(function(doc){
+          if(doc.exists){
+            cnt = doc.data().No;
+            cnt++
+            db.collection("Users").doc("super").set({
+              No = cnt,
+              cnt :[dname, id]
+            })
+          }
+          else{
+            console.log("Directory not Found")
+          }
+        })
         .then(function() {
             console.log("Document successfully written!");
             showafterin();
