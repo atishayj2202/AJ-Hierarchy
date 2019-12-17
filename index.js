@@ -46,6 +46,8 @@ function showsup(){
         .catch(function(error) {
             console.error("Error writing document: ", error);
         });
+        userid = user.uid;
+        console.log(userid);
         hidesignup();
       }
     });
@@ -93,23 +95,28 @@ function showsin(){
   
 }
 const signinform = document.querySelector('#sin');
-  signinform.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = signinform["uname-in"].value;
-    const password = signinform["pword-in"].value;
-    console.log(email + '  ' + password);
-    firebase.auth().signInWithEmailAndPassword(email, password).then(cred => {
-      console.log(cred);
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(errorMessage)
-    });
-    if(checker() == 1){
-      hidesignin();
-    }
-  })
+signinform.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = signinform["uname-in"].value;
+  const password = signinform["pword-in"].value;
+  console.log(email + '  ' + password);
+  firebase.auth().signInWithEmailAndPassword(email, password).then(cred => {
+    console.log(cred);
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(errorMessage)
+  });
+  if(checker() == 1){
+    hidesignin();
+  }
+})
+
+function showafterin(){
+
+  document.getElementById("last").style.visibility == "visible";
+}
+
 document.getElementById("bin").addEventListener("click", showsup);
 document.getElementById("bup").addEventListener("click", showsin);
-
