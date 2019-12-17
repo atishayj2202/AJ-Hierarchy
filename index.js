@@ -109,12 +109,13 @@ signinform.addEventListener('submit', (e) => {
     alert(errorMessage)
   });
   if(checker() == 1){
+    userid = user.uid;
+    console.log(userid);
     hidesignin();
   }
 })
 
 function showafterin(){
-
   document.getElementById("last").style.visibility == "visible";
 }
 
