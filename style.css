@@ -50,10 +50,12 @@ h2{
 #allow{
   width: 49%;
   background-color: green;
+  visibility: hidden;
 }
 #deny{
   width: 49%;
   background-color: red;
+  visibility: hidden;
 }
 input[type=text], select, [type=password] {
   width: 100%;
