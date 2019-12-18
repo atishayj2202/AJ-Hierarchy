@@ -42,35 +42,6 @@ function showsup(){
             aprove : approval,
             memberType : memtype, 
         }).then(function() {
-            if(approval == 0){
-              var cnt;
-              console.log("Writting Super");
-              db.collection("Users").doc("super").get().then(function(doc){
-                if(doc.exists){
-                  cnt = doc.data().No;
-                  console.log("Opened Super");
-                  cnt = cnt + 1;
-                }
-                else{
-                  cnt = -1;
-                  console.log("Directory not Found")
-                }
-              })
-              if(cnt != -1){
-                db.collection("Users").doc("super").update({
-                  "No" : cnt,
-                }).then(function(){
-                  console.log("Done Writting Super");
-                }).catch(function(error){
-                  console.log("error.message");
-                })
-                
-              }
-              else{
-                console.log("Error");
-              }
-              
-            }
             console.log("Document successfully written!");
             showafterin();
         })
