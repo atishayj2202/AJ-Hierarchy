@@ -76,9 +76,16 @@ function make_admin(){
     db.collection("Users").doc("super").get().then(function(doc){
       cnt = doc.data().No;
       cnt = cnt + 1;
+
       db.collection("Users").doc("super").update({
         "No" : cnt,
       })
+
+      db.collection("Users").doc("super").collection("names").doc(cnt).set({
+        "Name" : yname,
+        "Id" : cuid,
+      })
+
     })
   }
   else{
