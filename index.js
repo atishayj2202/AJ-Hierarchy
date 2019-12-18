@@ -69,7 +69,7 @@ function make_admin(){
   var user = firebase.auth().currentUser;
   if(user){
     var id = user.uid;
-    var yname = user.Name;
+    var yname = user.displayName;
     console.log(id + "  " + yname);
   }
   else{
@@ -165,7 +165,7 @@ function showafterin(){
         else{
           alert("Error");
         }
-        document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
+        document.getElementById("top").innerHTML = "Hi,  " + doc.data().Name;
         document.getElementById("userid").innerHTML = "User Id : " + doc.data().id;
         document.getElementById("sout").addEventListener("click", signout);
       }
