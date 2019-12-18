@@ -153,7 +153,7 @@ function showafterin(){
         }
         document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
         document.getElementById("userid").innerHTML = "User Id : " + doc.data().id;
-        document.getElementById("sout").addEventListener('click', signout());
+        document.getElementById("sout").addEventListener("click", signout);
       }
     }
     else{
@@ -162,8 +162,9 @@ function showafterin(){
   }).catch(function(error){
     alert(error);
   })
-
+  
 }
+
 
 document.getElementById("bin").addEventListener("click", showsup);
 document.getElementById("bup").addEventListener("click", showsin);
