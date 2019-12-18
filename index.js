@@ -78,7 +78,6 @@ function make_admin(){
       cnt = cnt + 1;
       db.collection("Users").doc("super").update({
         "No" : cnt,
-        cnt : [yname, cuid],
       })
     })
   }
