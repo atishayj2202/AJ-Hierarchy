@@ -55,6 +55,14 @@ function showsup(){
     });
   });
 }
+function signout(){
+  firebase.auth().signOut().then(function(){
+    console.log("Signed Out");
+  }).catch(function(error){
+    alert(error.message);
+  })
+  showsin();
+}
 function hideafterin(){
   document.getElementById("last").style.visibility = "hidden";
 }
