@@ -153,6 +153,7 @@ function showafterin(){
         }
         document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
         document.getElementById("userid").innerHTML = "User Id : " + doc.data().id;
+        document.getElementById("sout").addEventListener('click', signout());
       }
     }
     else{
