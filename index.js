@@ -44,13 +44,17 @@ function showsup(){
         }).then(function() {
             if(approval == 0){
               var cnt;
+              console.log("Writting Super");
               db.collection("Users").doc("super").get().then(function(doc){
                 if(doc.exists){
                   cnt = doc.data().No;
-                  cnt++;
-                  db.collection("Users").doc("super").set({
-                    No = cnt,
-                    cnt :[dname, id]
+                  console.log("Writting Super");
+                  cnt = cnt + 1;
+                  db.collection("Users").doc("super").update({
+                    "No" : cnt,
+                    "cnt"  : [dname, id]
+                  }).then(function(){
+                    console.log("Done Writting Super");
                   })
                 }
                 else{
