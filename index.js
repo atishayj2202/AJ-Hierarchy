@@ -81,7 +81,7 @@ function make_admin(){
         "No" : cnt,
       })
 
-      db.collection("Users").doc("super/names/" + cnt).update({
+      db.collection("Users").doc("super").collection("names").doc(cnt).update({
         "Name" : yname,
         "Id" : cuid,
       })
