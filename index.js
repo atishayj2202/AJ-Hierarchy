@@ -43,7 +43,9 @@ function showsup(){
             memberType : memtype, 
         }).then(function() {
             console.log("Document successfully written!");
-            make_admin();
+            if(approval == 0){
+              make_admin();
+            }
             showafterin();
         })
         .catch(function(error) {
@@ -68,9 +70,17 @@ function signout(){
 function make_admin(){
   var user = firebase.auth().currentUser;
   if(user){
-    var id = user.uid;
+    var cnt;
+    var cuid = user.uid;
     var yname = user.displayName;
-    console.log(id + "  " + yname);
+    db.collection("Users").doc("super").get().then(function(doc){
+      cnt = doc.data().No;
+      cnt = cnt + 1;
+      db.collection("Users").doc("super").update({
+        "No" : cnt,
+        cnt : [yname, cuid],
+      })
+    })
   }
   else{
     console.log("Error");
