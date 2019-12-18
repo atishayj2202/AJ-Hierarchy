@@ -43,6 +43,7 @@ function showsup(){
             memberType : memtype, 
         }).then(function() {
             console.log("Document successfully written!");
+            make_admin();
             showafterin();
         })
         .catch(function(error) {
@@ -63,6 +64,19 @@ function signout(){
   })
   showsin();
 }
+
+function make_admin(){
+  var user = firebase.auth().currentUser;
+  if(user){
+    var id = user.uid;
+    var yname = user.Name;
+    console.log(id + "  " + yname);
+  }
+  else{
+    console.log("Error");
+  }
+}
+
 function hideafterin(){
   document.getElementById("last").style.visibility = "hidden";
 }
