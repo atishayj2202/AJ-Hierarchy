@@ -51,7 +51,7 @@ function showsup(){
           }
           else{
             if(approval==1){
-              // make admin()
+              make_admin();
             }
             showafterin();
           }
@@ -70,7 +70,7 @@ function signout(){
   })
   showsin();
 }
-/*
+
 function make_admin(){
   var user = firebase.auth().currentUser;
   if(user){
@@ -78,21 +78,26 @@ function make_admin(){
     var cuid = user.uid;
     var yname = user.displayName;
     console.log(cuid + yname);
-    db.collection("Users").doc("super").get().then(function(doc){
-      cnt = doc.data().No;
+    firebase.database().ref("super").on('value', function(snapshot){
+      cnt = snapshot.val();
       cnt = cnt + 1;
-
     })
-  
-    
-    db.collection("Users").doc("super").update({
-      "No" : cnt,
-    });
-    console.log("Done Writing Super " + cnt);
-    db.collection("Aprovals").doc(cnt).set({
-      "name" : yname,
-      "id" : cuid
-    });
+    firebase.database().off();
+    console.log(cnt);
+    firebase.database().ref().set({
+      "super":cnt
+    }, function(error){
+      console.log("In");
+      if(error){
+        console.log("Error");
+        console.log(error.message);
+      }
+      else{
+        console.log("changed super");
+      }
+    })
+
+    firebase.database().ref("Users/" + userid).set()
     console.log("Done Writing Aprovals");
 
 
@@ -101,7 +106,7 @@ function make_admin(){
     console.log("Error");
   }
 }
-*/
+
 function hideafterin(){
   document.getElementById("last").style.visibility = "hidden";
 }
