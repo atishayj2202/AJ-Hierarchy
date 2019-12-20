@@ -50,7 +50,7 @@ function showsup(){
             console.log(error.message);
           }
           else{
-            if(approval==1){
+            if(approval==0){
               make_admin();
             }
             showafterin();
@@ -179,7 +179,7 @@ function showafterin(){
         document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
       }
       else{
-        document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
+        document.getElementById("in-explain").innerHTML = "You are Admin(Unapproved).";
       }
     }
     else if(snapshot.child("memberType").val() == "member"){
