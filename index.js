@@ -82,7 +82,6 @@ function make_admin(){
       cnt = snapshot.val();
       cnt = cnt + 1;
     })
-    firebase.database().off();
     console.log(cnt);
     firebase.database().ref().set({
       "super":cnt
@@ -97,7 +96,7 @@ function make_admin(){
       }
     })
 
-    firebase.database().ref("Users/" + userid).set()
+    //firebase.database().ref("Users/" + userid).set()
     console.log("Done Writing Aprovals");
 
 
