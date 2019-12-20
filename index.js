@@ -38,7 +38,7 @@ function showsup(){
           approval = 1;
         }
         
-        firebase.database().ref("Users/").set({
+        firebase.database().ref("Users/" + userid).set({
           "Name": dname, 
           "id": user.uid, 
           "aprove" : approval, 
@@ -169,7 +169,7 @@ function showafterin(){
   userid = user.uid;
   console.log(userid);
   document.getElementById("last").style.visibility = "visible";
-  database.ref("Users/"+ userid).once('value').then(function(error){
+  firebase.database().ref("Users/"+ userid).once('value').then(function(error){
     if(error){
       console.log(error.message);
     }
@@ -190,6 +190,7 @@ function showafterin(){
       }
       document.getElementById("top").innerHTML = "Hi,  " + snapshot.val().Name;
       document.getElementById("userid").innerHTML = "User Id : " + snapshot.val().id;
+      console.log("Done");
       document.getElementById("sout").addEventListener("click", signout);
     }
   })
