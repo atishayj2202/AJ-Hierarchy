@@ -33,26 +33,29 @@ function showsup(){
         });
         userid = user.uid;
         var approval = 0;
+
         if(memtype == "member"){
           approval = 1;
         }
-        database.ref('Users/'+userid).set({
-            Name: dname,
-            id: user.uid,
-            aprove : approval,
-            memberType : memtype, 
+        
+        firebase.database().ref("Users/").set({
+          "Name": dname, 
+          "id": user.uid, 
+          "aprove" : approval, 
+          "memberType" : memtype,
         }, function(error){
+          console.log("In");
           if(error){
             console.log("Error");
+            console.log(error.message);
           }
           else{
-            console.log("Document successfully written!");
-            if(approval == 0){
-              make_admin();
+            if(approval==1){
+              // make admin()
             }
             showafterin();
           }
-        });
+        })
         userid = user.uid;
         console.log(userid);
         hidesignup();
@@ -68,7 +71,7 @@ function signout(){
   })
   showsin();
 }
-
+/*
 function make_admin(){
   var user = firebase.auth().currentUser;
   if(user){
@@ -99,7 +102,7 @@ function make_admin(){
     console.log("Error");
   }
 }
-
+*/
 function hideafterin(){
   document.getElementById("last").style.visibility = "hidden";
 }
@@ -166,20 +169,30 @@ function showafterin(){
   userid = user.uid;
   console.log(userid);
   document.getElementById("last").style.visibility = "visible";
-  database.ref()
-  /*if(doc.data().aprove == 1){
+  database.ref("Users/"+ userid).once('value').then(function(error){
+    if(error){
+      console.log(error.message);
+    }
+    else{
+      if(snapshot.val().memberType == "admin"){
+        if(snapshot.val().aprove == 1){
           document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
         }
-        else if(doc.data().aprove == 0){
-          document.getElementById("in-explain").innerHTML = "You are Admin(Unpproved).";
-        }
         else{
-          alert("Error");
+          document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
         }
-        document.getElementById("top").innerHTML = "Hi,  " + doc.data().Name;
-        document.getElementById("userid").innerHTML = "User Id : " + doc.data().id;
-        document.getElementById("sout").addEventListener("click", signout);*/
-  
+      }
+      else if(snapshot.val().memberType == "member"){
+        document.getElementById("in-explain").innerHTML = "You are Member.";
+      }
+      else{
+        document.getElementById("in-explain").innerHTML = "You are Super Admin.";
+      }
+      document.getElementById("top").innerHTML = "Hi,  " + snapshot.val().Name;
+      document.getElementById("userid").innerHTML = "User Id : " + snapshot.val().id;
+      document.getElementById("sout").addEventListener("click", signout);
+    }
+  })
 }
 
 
