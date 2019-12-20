@@ -70,21 +70,23 @@ function signout(){
 function make_admin(){
   var user = firebase.auth().currentUser;
   if(user){
-    var cnt;
+    var cnt = 0;
     var cuid = user.uid;
     var yname = user.displayName;
+    console.log(cuid + yname);
     db.collection("Users").doc("super").get().then(function(doc){
       cnt = doc.data().No;
       cnt = cnt + 1;
+      db.collection("Approvals").doc(cnt).set({
+        "Name" : yname,
+        "Id" : cuid
+      })
 
       db.collection("Users").doc("super").update({
         "No" : cnt,
       })
 
-      db.collection("Users").doc("super").collection("names").doc(cnt).update({
-        "Name" : yname,
-        "Id" : cuid,
-      })
+      
 
     })
   }
