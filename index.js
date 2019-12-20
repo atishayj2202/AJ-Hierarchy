@@ -168,31 +168,27 @@ function showafterin(){
   userid = user.uid;
   console.log(userid);
   document.getElementById("last").style.visibility = "visible";
-  firebase.database().ref("Users/"+ userid).once('value').then(function(snapshot){
-    if(error){
-      console.log(error.message);
-    }
-    else{
-      if(snapshot.val().memberType == "admin"){
-        if(snapshot.val().aprove == 1){
-          document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
-        }
-        else{
-          document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
-        }
-      }
-      else if(snapshot.val().memberType == "member"){
-        document.getElementById("in-explain").innerHTML = "You are Member.";
+  firebase.database().ref("Users/"+ userid).on('value', function(snapshot){
+    if(snapshot.child("memberType").val() == "admin"){
+      if(snapshot.child("aprove").val() == 1){
+        document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
       }
       else{
-        document.getElementById("in-explain").innerHTML = "You are Super Admin.";
+        document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
       }
-      document.getElementById("top").innerHTML = "Hi,  " + snapshot.val().Name;
-      document.getElementById("userid").innerHTML = "User Id : " + snapshot.val().id;
-      console.log("Done");
-      document.getElementById("sout").addEventListener("click", signout);
     }
-  })
+    else if(snapshot.child("memberType").val() == "member"){
+      document.getElementById("in-explain").innerHTML = "You are Member.";
+    }
+    else{
+      document.getElementById("in-explain").innerHTML = "You are Super Admin.";
+    }
+    document.getElementById("top").innerHTML = "Hi,  " + snapshot.child("Name").val();
+    document.getElementById("userid").innerHTML = "User Id : " + snapshot.child("id").val();
+    console.log("Done");
+    document.getElementById("sout").addEventListener("click", signout);
+  }
+  )
 }
 
 
