@@ -36,20 +36,22 @@ function showsup(){
         if(memtype == "member"){
           approval = 1;
         }
-        db.collection("Users").doc(user.uid).set({
+        database.ref('Users/'+userid).set({
             Name: dname,
             id: user.uid,
             aprove : approval,
             memberType : memtype, 
-        }).then(function() {
+        }, function(error){
+          if(error){
+            console.log("Error");
+          }
+          else{
             console.log("Document successfully written!");
             if(approval == 0){
               make_admin();
             }
             showafterin();
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
+          }
         });
         userid = user.uid;
         console.log(userid);
@@ -77,18 +79,21 @@ function make_admin(){
     db.collection("Users").doc("super").get().then(function(doc){
       cnt = doc.data().No;
       cnt = cnt + 1;
-      db.collection("Approvals").doc(cnt).set({
-        "Name" : yname,
-        "Id" : cuid
-      })
-
-      db.collection("Users").doc("super").update({
-        "No" : cnt,
-      })
-
-      
 
     })
+  
+    
+    db.collection("Users").doc("super").update({
+      "No" : cnt,
+    });
+    console.log("Done Writing Super " + cnt);
+    db.collection("Aprovals").doc(cnt).set({
+      "name" : yname,
+      "id" : cuid
+    });
+    console.log("Done Writing Aprovals");
+
+
   }
   else{
     console.log("Error");
@@ -161,20 +166,8 @@ function showafterin(){
   userid = user.uid;
   console.log(userid);
   document.getElementById("last").style.visibility = "visible";
-  db.collection("Users").doc(userid).get().then(function(doc){
-    if(doc.exists){
-      if (doc.data().memberType == "member"){
-        document.getElementById("in-explain").innerHTML = "You are Member.";
-        document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
-        document.getElementById("userid").innerHTML = "User Id : " + doc.data().id;
-      }
-      /*else if(doc.data().memberType == "super"){
-        document.getElementById("in-explain").innerHTML = "You are Super Admin.";
-        document.getElementById("top").innerHTML = "Hi, " + doc.data().Name;
-        document.getElementById("userid").innerHTML = "Approve :-<br>" + doc.data().Name + "<br>";
-      }*/
-      else if (doc.data().memberType == "admin"){
-        if(doc.data().aprove == 1){
+  database.ref()
+  /*if(doc.data().aprove == 1){
           document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
         }
         else if(doc.data().aprove == 0){
@@ -185,15 +178,7 @@ function showafterin(){
         }
         document.getElementById("top").innerHTML = "Hi,  " + doc.data().Name;
         document.getElementById("userid").innerHTML = "User Id : " + doc.data().id;
-        document.getElementById("sout").addEventListener("click", signout);
-      }
-    }
-    else{
-      console.log("Wrong Directory");
-    };
-  }).catch(function(error){
-    alert(error);
-  })
+        document.getElementById("sout").addEventListener("click", signout);*/
   
 }
 
