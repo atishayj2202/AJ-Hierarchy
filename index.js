@@ -56,7 +56,6 @@ function showsup(){
             showafterin();
           }
         })
-        userid = user.uid;
         console.log(userid);
         hidesignup();
       }
@@ -169,7 +168,7 @@ function showafterin(){
   userid = user.uid;
   console.log(userid);
   document.getElementById("last").style.visibility = "visible";
-  firebase.database().ref("Users/"+ userid).once('value').then(function(error){
+  firebase.database().ref("Users/"+ userid).once('value').then(function(snapshot){
     if(error){
       console.log(error.message);
     }
