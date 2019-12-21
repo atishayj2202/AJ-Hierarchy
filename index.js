@@ -44,20 +44,16 @@ function showsup(){
           "id": user.uid, 
           "aprove" : approval, 
           "memberType" : memtype
-        }, function(error){
-          console.log("In");
-          if(error){
-            console.log("Error");
-            console.log(error.message);
-          }
-          else{
-            if(approval==0){
-              make_admin();
-            }
-            console.log("document Written")
-            showafterin();
-          }
         })
+        console.log("In");
+        
+        
+        if(approval==0){
+          make_admin();
+        }
+        console.log("document Written")
+        showafterin();
+      
         console.log(userid);
         hidesignup();
       }
