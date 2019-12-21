@@ -39,21 +39,15 @@ function showsup(){
         }
         console.clear();
         console.log(dname, "    ",user.uid, "    ",approval, "    ",memtype, "    ",);
-        firebase.database().ref().child("Users").child(userid).set({
-          "Name": dname, 
-          "id": user.uid, 
-          "aprove" : approval, 
-          "memberType" : memtype
+        firebase.database().ref("Users/"+userid).set({
+          Name: dname, 
+          Id : user.uid, 
+          Aprove : approval, 
+          MemberType : memtype
+        }, function(error){
+          showafterin();
+          
         })
-        console.log("In");
-        
-        
-        if(approval==0){
-          make_admin();
-        }
-        console.log("document Written")
-        showafterin();
-      
         console.log(userid);
         hidesignup();
       }
