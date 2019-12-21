@@ -53,6 +53,7 @@ function showsup(){
             if(approval==0){
               make_admin();
             }
+            console.log("document Written")
             showafterin();
           }
         })
