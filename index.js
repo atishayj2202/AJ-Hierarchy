@@ -37,7 +37,8 @@ function showsup(){
         if(memtype == "member"){
           approval = 1;
         }
-        
+        console.clear();
+        console.log(dname, "    ",user.uid, "    ",approval, "    ",memtype, "    ",);
         firebase.database().ref("Users/" + userid).set({
           "Name": dname, 
           "id": user.uid, 
@@ -60,8 +61,8 @@ function showsup(){
         console.log(userid);
         hidesignup();
       }
-    });
-  });
+    })
+  })
 }
 function signout(){
   firebase.auth().signOut().then(function(){
