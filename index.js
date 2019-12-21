@@ -46,7 +46,9 @@ function showsup(){
           MemberType : memtype
         }, function(error){
           showafterin();
-          make_admin();
+          if(approval == 0){
+            make_admin();
+          }
           
         })
         console.log(userid);
@@ -65,39 +67,17 @@ function signout(){
 }
 
 function make_admin(){
-  var user = firebase.auth().currentUser;
-  if(user){
-    var cnt = 0;
-    var cuid = user.uid;
-    var yname = user.displayName;
-
-    console.log(cuid + yname);
-    firebase.database().ref().on('value', function(snapshot){
-      cnt = snapshot.child("super").val();
-      cnt = cnt + 1;
-    })
-    console.log(cnt);
-    firebase.database().ref().set({
-      "super":cnt
-    }, function(error){
-      console.log("In");
-      if(error){
-        console.log("Error");
-        console.log(error.message);
-      }
-      else{
-        console.log("changed super");
-      }
-    })
-
-    //firebase.database().ref("Users/" + userid).set()
-    console.log("Done Writing Aprovals");
-
-
-  }
-  else{
-    console.log("Error");
-  }
+  var user = firebase.auth().currentUser();
+  var cnt = 0;
+  firebase.database().ref().on('value', function(snapshot){
+    cnt = snapshot.child("super").val();
+    cnt = cnt + 1;
+  })
+  console.clear();
+  console.log(cnt);
+  firebase.database().ref().set({
+    super : cnt,
+  })
 }
 
 function hideafterin(){
