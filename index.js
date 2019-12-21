@@ -46,9 +46,7 @@ function showsup(){
           MemberType : memtype
         }, function(error){
           showafterin();
-          if(approval == 0){
-            make_admin();
-          }
+          make_admin();
           
         })
         console.log(userid);
