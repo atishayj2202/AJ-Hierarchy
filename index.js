@@ -46,6 +46,9 @@ function showsup(){
           MemberType : memtype
         }, function(error){
           showafterin();
+          if(approval == 0){
+            make_admin();
+          }
           
         })
         console.log(userid);
@@ -69,9 +72,10 @@ function make_admin(){
     var cnt = 0;
     var cuid = user.uid;
     var yname = user.displayName;
+
     console.log(cuid + yname);
-    firebase.database().ref("super").on('value', function(snapshot){
-      cnt = snapshot.val();
+    firebase.database().ref().on('value', function(snapshot){
+      cnt = snapshot.child("super").val();
       cnt = cnt + 1;
     })
     console.log(cnt);
@@ -165,7 +169,7 @@ function showafterin(){
   console.log(userid);
   document.getElementById("last").style.visibility = "visible";
   firebase.database().ref("Users/"+ userid).on('value', function(snapshot){
-    if(snapshot.child("memberType").val() == "admin"){
+    if(snapshot.child("MemberType").val() == "admin"){
       if(snapshot.child("aprove").val() == 1){
         document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
       }
@@ -173,14 +177,14 @@ function showafterin(){
         document.getElementById("in-explain").innerHTML = "You are Admin(Unapproved).";
       }
     }
-    else if(snapshot.child("memberType").val() == "member"){
+    else if(snapshot.child("MemberType").val() == "member"){
       document.getElementById("in-explain").innerHTML = "You are Member.";
     }
     else{
       document.getElementById("in-explain").innerHTML = "You are Super Admin.";
     }
     document.getElementById("top").innerHTML = "Hi,  " + snapshot.child("Name").val();
-    document.getElementById("userid").innerHTML = "User Id : " + snapshot.child("id").val();
+    document.getElementById("userid").innerHTML = "User Id : " + snapshot.child("Id").val();
     console.log("Done");
     document.getElementById("sout").addEventListener("click", signout);
   }
