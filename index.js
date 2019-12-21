@@ -39,11 +39,11 @@ function showsup(){
         }
         console.clear();
         console.log(dname, "    ",user.uid, "    ",approval, "    ",memtype, "    ",);
-        firebase.database().ref("Users/" + user.uid).set({
+        firebase.database().ref().child("Users").child(userid).set({
           "Name": dname, 
           "id": user.uid, 
           "aprove" : approval, 
-          "memberType" : memtype,
+          "memberType" : memtype
         }, function(error){
           console.log("In");
           if(error){
