@@ -45,10 +45,11 @@ function showsup(){
           Aprove : approval, 
           MemberType : memtype
         }, function(error){
-          showafterin();
           if(approval == 0){
             make_admin();
           }
+          showafterin();
+          
           
         })
         console.log(userid);
