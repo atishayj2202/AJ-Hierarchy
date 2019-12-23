@@ -7,6 +7,7 @@ function showsupadm(){
   hideafterin();
   
   document.getElementById("HelloName").innerHTML = "Make For Admin";
+  signout();
   //signup
   const signupform = document.querySelector('#sup');
   signupform.addEventListener('submit', (e)=>{
@@ -168,6 +169,7 @@ signinform.addEventListener('submit', (e) => {
 })
 
 function showafterin(){
+
   document.getElementById("allow").style.visibility = "hidden";
   hidesignin();
   hidesignup();
