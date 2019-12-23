@@ -45,10 +45,18 @@ function showsup(){
           Aprove : approval, 
           MemberType : memtype
         }, function(error){
-          if(approval == 0){
-            make_admin();
-          }
           showafterin();
+          if(approval == 0){
+            var cnt;
+            firebase.database().ref("super").once('value').then(function(snapshot){
+              cnt = snapshot.val();
+              cnt = cnt + 1;
+              console.clear();
+              console.log("Reading Super");
+              console.log(cnt);
+              firebase.database().ref("super").set(cnt);
+            })
+          }
           
           
         })
@@ -67,20 +75,7 @@ function signout(){
   showsin();
 }
 
-function make_admin(){
-  var user = firebase.auth().currentUser();
-  var cnt = 0;
-  firebase.database().ref().on('value', function(snapshot){
-    cnt = snapshot.child("super").val();
-    cnt = cnt + 1;
-    console.clear();
-    console.log(cnt);
-  })
-  
-  /*firebase.database().ref().update({
-    super : cnt,
-  })*/
-}
+
 
 function hideafterin(){
   document.getElementById("last").style.visibility = "hidden";
@@ -169,6 +164,7 @@ function showafterin(){
     document.getElementById("sout").addEventListener("click", signout);
   }
   )
+  return;
 }
 
 
