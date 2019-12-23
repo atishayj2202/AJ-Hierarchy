@@ -54,7 +54,15 @@ function showsup(){
               console.clear();
               console.log("Reading Super");
               console.log(cnt);
-              firebase.database().ref("super").set(cnt);
+              firebase.database().ref("super").set(cnt,function(error){
+                firebase.database().ref("admin/"+cnt).set({
+                  Id : user.uid,
+                  name: user.displayName,
+                }, function(error){
+                  console.log("Made Admin");
+                })
+                console.log("Data Editted");
+              });
             })
           }
           
