@@ -1,10 +1,12 @@
 import "./style.css"
 var userid;
 
-function showsup(){
+function showsupadm(){
   hidesignin();
   showsignup();
   hideafterin();
+  
+  document.getElementById("HelloName").innerHTML = "Make For Admin";
   //signup
   const signupform = document.querySelector('#sup');
   signupform.addEventListener('submit', (e)=>{
@@ -12,7 +14,6 @@ function showsup(){
     const email = signupform["uname-up"].value;
     const password = signupform["pword-up"].value;
     const dname = signupform["name-up"].value;
-    const memtype = document.getElementById("memt").value;
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -32,41 +33,14 @@ function showsup(){
           alert(errorMessage);
         });
         userid = user.uid;
-        var approval = 0;
-
-        if(memtype == "member"){
-          approval = 1;
-        }
         console.clear();
-        console.log(dname, "    ",user.uid, "    ",approval, "    ",memtype, "    ",);
+        console.log(dname, "    ",user.uid);
         firebase.database().ref("Users/"+userid).set({
           Name: dname, 
-          Id : user.uid, 
-          Aprove : approval, 
-          MemberType : memtype
+          Id : user.uid,
+          MemberType : "admin"
         }, function(error){
           showafterin();
-          if(approval == 0){
-            var cnt;
-            firebase.database().ref("super").once('value').then(function(snapshot){
-              cnt = snapshot.val();
-              cnt = cnt + 1;
-              console.clear();
-              console.log("Reading Super");
-              console.log(cnt);
-              firebase.database().ref("super").set(cnt,function(error){
-                firebase.database().ref("admin/"+cnt).set({
-                  Id : user.uid,
-                  name: user.displayName,
-                }, function(error){
-                  console.log("Made Admin");
-                })
-                console.log("Data Editted");
-              });
-            })
-          }
-          
-          
         })
         console.log(userid);
         hidesignup();
@@ -74,6 +48,54 @@ function showsup(){
     })
   })
 }
+
+function showsupmem(){
+  hidesignin();
+  showsignup();
+  hideafterin();
+  //signup
+  document.getElementById("HelloName").innerHTML = "Sign Up For Member";
+  const signupform = document.querySelector('#sup');
+  signupform.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const email = signupform["uname-up"].value;
+    const password = signupform["pword-up"].value;
+    const dname = signupform["name-up"].value;
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+      alert(errorMessage);
+    }).then(cred => {
+      console.log(cred);
+      if(checker() == 1){
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: dname
+        }).then(function(){
+          alert("Hello " + user.displayName);
+        }).catch(function(error){
+          var errorMessage = error.message;
+          alert(errorMessage);
+        });
+        userid = user.uid;
+        console.clear();
+        console.log(dname, "    ",user.uid);
+        firebase.database().ref("Users/"+userid).set({
+          Name: dname, 
+          Id : user.uid, 
+          MemberType : "member"
+        }, function(error){
+          showafterin();
+        })
+        console.log(userid);
+        hidesignup();
+      }
+    })
+  })
+}
+
 function signout(){
   firebase.auth().signOut().then(function(){
     console.log("Signed Out");
@@ -153,18 +175,15 @@ function showafterin(){
   document.getElementById("last").style.visibility = "visible";
   firebase.database().ref("Users/"+ userid).on('value', function(snapshot){
     if(snapshot.child("MemberType").val() == "admin"){
-      if(snapshot.child("aprove").val() == 1){
-        document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
-      }
-      else{
-        document.getElementById("in-explain").innerHTML = "You are Admin(Unapproved).";
-      }
+      document.getElementById("in-explain").innerHTML = "You are Admin(Approved).";
     }
     else if(snapshot.child("MemberType").val() == "member"){
       document.getElementById("in-explain").innerHTML = "You are Member.";
     }
     else{
       document.getElementById("in-explain").innerHTML = "You are Super Admin.";
+      document.getElementById("allow").style.visibility = "visible";
+      document.getElementById("allow").addEventListener("click", signupadm);
     }
     document.getElementById("top").innerHTML = "Hi,  " + snapshot.child("Name").val();
     document.getElementById("userid").innerHTML = "User Id : " + snapshot.child("Id").val();
@@ -176,5 +195,5 @@ function showafterin(){
 }
 
 
-document.getElementById("bin").addEventListener("click", showsup);
+document.getElementById("bin").addEventListener("click", showsupmem);
 document.getElementById("bup").addEventListener("click", showsin);
