@@ -41,6 +41,8 @@ function showsupadm(){
           MemberType : "admin"
         }, function(error){
           showafterin();
+          document.getElementById("Just_admin").style.visibility = "visible";
+
         })
         console.log(userid);
         hidesignup();
@@ -166,6 +168,7 @@ signinform.addEventListener('submit', (e) => {
 })
 
 function showafterin(){
+  document.getElementById("allow").style.visibility = "hidden";
   hidesignin();
   hidesignup();
   console.log("Closed Everyting")
@@ -183,7 +186,7 @@ function showafterin(){
     else{
       document.getElementById("in-explain").innerHTML = "You are Super Admin.";
       document.getElementById("allow").style.visibility = "visible";
-      document.getElementById("allow").addEventListener("click", signupadm);
+      document.getElementById("allow").addEventListener("click", showsupadm);
     }
     document.getElementById("top").innerHTML = "Hi,  " + snapshot.child("Name").val();
     document.getElementById("userid").innerHTML = "User Id : " + snapshot.child("Id").val();

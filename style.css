@@ -45,16 +45,14 @@ h2{
   width: 50%;
   height: auto;
   margin: auto;
-  visibility: visible;
 }
 #allow{
-  width: 49%;
+  width: auto;
   background-color: green;
   visibility: hidden;
 }
-#deny{
-  width: 49%;
-  background-color: red;
+#Just_admin{
+  
   visibility: hidden;
 }
 input[type=text], select, [type=password] {
