@@ -73,12 +73,13 @@ function make_admin(){
   firebase.database().ref().on('value', function(snapshot){
     cnt = snapshot.child("super").val();
     cnt = cnt + 1;
+    console.clear();
+    console.log(cnt);
   })
-  console.clear();
-  console.log(cnt);
-  firebase.database().ref().set({
+  
+  /*firebase.database().ref().update({
     super : cnt,
-  })
+  })*/
 }
 
 function hideafterin(){
