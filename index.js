@@ -7,7 +7,11 @@ function showsupadm(){
   hideafterin();
   
   document.getElementById("HelloName").innerHTML = "Make For Admin";
-  signout();
+  firebase.auth().signOut().then(function(){
+    console.log("Signed Out");
+  }).catch(function(error){
+    alert(error.message);
+  })
   //signup
   const signupform = document.querySelector('#sup');
   signupform.addEventListener('submit', (e)=>{
