@@ -182,11 +182,13 @@ function showafterin(){
     }
     else if(snapshot.child("MemberType").val() == "member"){
       document.getElementById("in-explain").innerHTML = "You are Member.";
+      document.getElementById("Just_admin").style.visibility = "hidden";
     }
     else{
       document.getElementById("in-explain").innerHTML = "You are Super Admin.";
       document.getElementById("allow").style.visibility = "visible";
       document.getElementById("allow").addEventListener("click", showsupadm);
+      document.getElementById("Just_admin").style.visibility = "hidden";
     }
     document.getElementById("top").innerHTML = "Hi,  " + snapshot.child("Name").val();
     document.getElementById("userid").innerHTML = "User Id : " + snapshot.child("Id").val();
