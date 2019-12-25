@@ -106,6 +106,7 @@ function showsupmem(){
 function signout(){
   firebase.auth().signOut().then(function(){
     console.log("Signed Out");
+    document.getElementById("Just_admin").style.visibility = "hidden";
   }).catch(function(error){
     alert(error.message);
   })
@@ -194,6 +195,8 @@ function showafterin(){
       document.getElementById("in-explain").innerHTML = "You are Super Admin.";
       document.getElementById("allow").style.visibility = "visible";
       document.getElementById("allow").addEventListener("click", showsupadm);
+      document.getElementById("deny").style.visibility = "visible";
+      document.getElementById("deny").addEventListener("click", showsupadm);
       document.getElementById("Just_admin").style.visibility = "hidden";
     }
     document.getElementById("top").innerHTML = "Hi,  " + snapshot.child("Name").val();
