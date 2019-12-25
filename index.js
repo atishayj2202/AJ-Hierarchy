@@ -231,7 +231,7 @@ function showafterin(){
 }
 function showlist(){
   hideafterin();
-  document.getElementById("last").style.visibility = "visible";
+  document.getElementById("denydiv").style.visibility = "visible";
   
 }
 
