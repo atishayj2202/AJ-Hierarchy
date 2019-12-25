@@ -117,6 +117,10 @@ function signout(){
 
 function hideafterin(){
   document.getElementById("last").style.visibility = "hidden";
+  document.getElementById("last").style.height = 0;
+  document.getElementById("last").style.padding = 0;
+  document.getElementById("last").style.margin = 0;   
+
 }
 function checker(){
   var user = firebase.auth().currentUser;
@@ -174,7 +178,9 @@ signinform.addEventListener('submit', (e) => {
 })
 
 function showafterin(){
-
+  document.getElementById("last").style.height = "auto";
+  document.getElementById("last").style.padding = 10;
+  document.getElementById("last").style.margin = "auto";
   document.getElementById("allow").style.visibility = "hidden";
   hidesignin();
   hidesignup();
@@ -196,7 +202,7 @@ function showafterin(){
       document.getElementById("allow").style.visibility = "visible";
       document.getElementById("allow").addEventListener("click", showsupadm);
       document.getElementById("deny").style.visibility = "visible";
-      document.getElementById("deny").addEventListener("click", showsupadm);
+      document.getElementById("deny").addEventListener("click", showlist);
       document.getElementById("Just_admin").style.visibility = "hidden";
     }
     document.getElementById("top").innerHTML = "Hi,  " + snapshot.child("Name").val();
@@ -207,7 +213,11 @@ function showafterin(){
   )
   return;
 }
-
+function showlist(){
+  hideafterin();
+  document.getElementById("last").style.visibility = "visible";
+  
+}
 
 document.getElementById("bin").addEventListener("click", showsupmem);
 document.getElementById("bup").addEventListener("click", showsin);

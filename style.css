@@ -49,12 +49,10 @@ h2{
   overflow: scroll;
 }
 #allow{
-  width: auto;
   background-color: green;
   visibility: hidden;
 }
 #deny{
-  width: auto;
   background-color: red;
   visibility: hidden;
 }
