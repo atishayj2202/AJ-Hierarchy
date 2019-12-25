@@ -44,12 +44,30 @@ h2{
   padding: 10px;
   width: 50%;
   height: auto;
+  max-height: 70%;
   margin: auto;
+  overflow: scroll;
 }
 #allow{
   width: auto;
   background-color: green;
   visibility: hidden;
+}
+#deny{
+  width: auto;
+  background-color: red;
+  visibility: hidden;
+}
+#denydiv{
+  visibility: hidden;
+  border-radius: 5px;
+  background-color: rgba(255,255,255,0.15);
+  padding: 10px;
+  width: 50%;
+  height: auto;
+  max-height: 70%;
+  margin: auto;
+  overflow: scroll;
 }
 #Just_admin{
   
@@ -91,7 +109,9 @@ input[type=submit]:hover,button:hover {
   width: 50%;
   height: auto;
   margin: auto;
+  max-height: 70%;
   visibility: visible;
+  overflow: scroll;
 }
 
 #signup {
@@ -102,4 +122,6 @@ input[type=submit]:hover,button:hover {
   height: auto;
   margin: auto;
   visibility: hidden;
+  max-height: 70%;
+  overflow: scroll;
 }
