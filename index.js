@@ -94,6 +94,14 @@ function showsupmem(){
           Id : user.uid, 
           MemberType : "member"
         }, function(error){
+          var i;
+          firebase.database().ref('cnt').once('value').then(function(snapshot){
+            i = snapshot.val();
+            i = i+1;
+            firebase.database().ref("xyz/" + i).set(userid, function(error){
+              firebase.database().ref(cnt).set(i);
+            });
+          })
           showafterin();
         })
         console.log(userid);
