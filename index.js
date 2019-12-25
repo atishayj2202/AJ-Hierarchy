@@ -136,6 +136,9 @@ function hideafterin(){
   document.getElementById("last").style.height = 0;
   document.getElementById("last").style.padding = 0;
   document.getElementById("last").style.margin = 0;   
+  document.getElementById("allow").style.visibility = "hidden";
+  document.getElementById("deny").style.visibility = "hidden";
+  document.getElementById("Just_admin").style.visibility = "hidden";
 
 }
 function checker(){
@@ -216,8 +219,8 @@ function showafterin(){
     else{
       document.getElementById("in-explain").innerHTML = "You are Super Admin.";
       document.getElementById("allow").style.visibility = "visible";
-      document.getElementById("allow").addEventListener("click", showsupadm);
       document.getElementById("deny").style.visibility = "visible";
+      document.getElementById("allow").addEventListener("click", showsupadm);
       document.getElementById("deny").addEventListener("click", showlist);
       document.getElementById("Just_admin").style.visibility = "hidden";
     }
@@ -232,7 +235,15 @@ function showafterin(){
 function showlist(){
   hideafterin();
   document.getElementById("denydiv").style.visibility = "visible";
-  
+  var data;
+  var ingt;
+  firebase.database().ref("cnt").once('value').then(function(snapshot){
+    ingt = snapshot.val(); 
+    var i = 1;
+    while(i <= ingt){
+      firebase.database().ref('xyz/'+i).once
+    }
+  })
 }
 
 document.getElementById("bin").addEventListener("click", showsupmem);
