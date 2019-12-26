@@ -280,7 +280,7 @@ function showlist(){
       i = i + 1;
     }
   })
-  var deleteuserid = document.querySelector("delet");
+  var deleteuserid = document.querySelector("#delet");
   deleteuserid.addEventListener('submit', (e)=>{
     e.preventDefault();
   })
