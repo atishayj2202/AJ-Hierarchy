@@ -235,14 +235,23 @@ function showafterin(){
 function showlist(){
   hideafterin();
   document.getElementById("denydiv").style.visibility = "visible";
-  var data;
+  document.getElementById("backer").style.visibility = "visible";
+  
+  var data = null;
   var ingt;
   firebase.database().ref("cnt").once('value').then(function(snapshot){
     ingt = snapshot.val(); 
     var i = 1;
+    var xid;
     while(i <= ingt){
-      firebase.database().ref('xyz/'+i).once
+      firebase.database().ref('xyz/'+i).once('value').then(function(snapshot){
+        xid = snapshot.val();
+        firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
+          data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID :" +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd>";
+        });
+      })
     }
+    document.getElementById("denylist").innerHTML = data;
   })
 }
 
