@@ -240,10 +240,10 @@ function showlist(){
   
   var data = null;
   var ingt;
+  var i = 1;
+  var xid;
   firebase.database().ref("cnt").once('value').then(function(snapshot){
     ingt = snapshot.val(); 
-    var i = 1;
-    var xid;
     while(i <= ingt){
       firebase.database().ref('xyz/'+i).once('value').then(function(snapshot){
         xid = snapshot.val();
@@ -251,6 +251,7 @@ function showlist(){
           data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID :" +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd>";
         });
       })
+      i = i + 1;
     }
     document.getElementById("denylist").innerHTML = data;
   })
