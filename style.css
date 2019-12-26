@@ -71,7 +71,7 @@ h2{
   
   visibility: hidden;
 }
-input[type=text], select, [type=password] {
+input[type=text], select, [type=password], [type=cpassword] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
