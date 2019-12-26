@@ -18,50 +18,56 @@ function showsupadm(){
     e.preventDefault();
     const email = signupform["uname-up"].value;
     const password = signupform["pword-up"].value;
-    const dname = signupform["name-up"].value;
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-      alert(errorMessage);
-    }).then(cred => {
-      console.log(cred);
-      if(checker() == 1){
-        var user = firebase.auth().currentUser;
-        user.updateProfile({
-          displayName: dname
-        }).then(function(){
-          alert("Hello " + user.displayName);
-        }).catch(function(error){
-          var errorMessage = error.message;
-          alert(errorMessage);
-        });
-        userid = user.uid;
-        console.clear();
-        console.log(dname, "    ",user.uid);
-        firebase.database().ref("Users/"+userid).set({
-          Name: dname, 
-          Id : user.uid,
-          MemberType : "admin",
-          Email : email
-        }, function(error){
-          var i;
-          firebase.database().ref('cnt').once('value').then(function(snapshot){
-            i = snapshot.val();
-            i = i+1;
-            firebase.database().ref("xyz/" + i).set(userid, function(error){
-              firebase.database().ref("cnt").set(i);
-            });
-          })
-          showafterin();
-          document.getElementById("Just_admin").style.visibility = "visible";
+    const conpassword = signupform["cpword-up"].value;
+    if(conpassword != password){
+      alert("Password Did'nt matched in feilds");
+    }
+    else{
+      const dname = signupform["name-up"].value;
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        alert(errorMessage);
+      }).then(cred => {
+        console.log(cred);
+        if(checker() == 1){
+          var user = firebase.auth().currentUser;
+          user.updateProfile({
+            displayName: dname
+          }).then(function(){
+            alert("Hello " + user.displayName);
+          }).catch(function(error){
+            var errorMessage = error.message;
+            alert(errorMessage);
+          });
+          userid = user.uid;
+          console.clear();
+          console.log(dname, "    ",user.uid);
+          firebase.database().ref("Users/"+userid).set({
+            Name: dname, 
+            Id : user.uid,
+            MemberType : "admin",
+            Email : email
+          }, function(error){
+            var i;
+            firebase.database().ref('cnt').once('value').then(function(snapshot){
+              i = snapshot.val();
+              i = i+1;
+              firebase.database().ref("xyz/" + i).set(userid, function(error){
+                firebase.database().ref("cnt").set(i);
+              });
+            })
+            showafterin();
+            document.getElementById("Just_admin").style.visibility = "visible";
 
-        })
-        console.log(userid);
-        hidesignup();
-      }
-    })
+          })
+          console.log(userid);
+          hidesignup();
+        }
+      })
+    }
   })
 }
 
@@ -77,47 +83,53 @@ function showsupmem(){
     const email = signupform["uname-up"].value;
     const password = signupform["pword-up"].value;
     const dname = signupform["name-up"].value;
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-      alert(errorMessage);
-    }).then(cred => {
-      console.log(cred);
-      if(checker() == 1){
-        var user = firebase.auth().currentUser;
-        user.updateProfile({
-          displayName: dname
-        }).then(function(){
-          alert("Hello " + user.displayName);
-        }).catch(function(error){
-          var errorMessage = error.message;
-          alert(errorMessage);
-        });
-        userid = user.uid;
-        console.clear();
-        console.log(dname, "    ",user.uid);
-        firebase.database().ref("Users/"+userid).set({
-          Name: dname, 
-          Id : user.uid, 
-          MemberType : "member",
-          Email : email
-        }, function(error){
-          var i;
-          firebase.database().ref('cnt').once('value').then(function(snapshot){
-            i = snapshot.val();
-            i = i+1;
-            firebase.database().ref("xyz/" + i).set(userid, function(error){
-              firebase.database().ref("cnt").set(i);
-            });
+    const conpassword = signupform["cpword-up"].value;
+    if(conpassword != password){
+      alert("Password Did'nt matched in feilds");
+    }
+    else{
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        alert(errorMessage);
+      }).then(cred => {
+        console.log(cred);
+        if(checker() == 1){
+          var user = firebase.auth().currentUser;
+          user.updateProfile({
+            displayName: dname
+          }).then(function(){
+            alert("Hello " + user.displayName);
+          }).catch(function(error){
+            var errorMessage = error.message;
+            alert(errorMessage);
+          });
+          userid = user.uid;
+          console.clear();
+          console.log(dname, "    ",user.uid);
+          firebase.database().ref("Users/"+userid).set({
+            Name: dname, 
+            Id : user.uid, 
+            MemberType : "member",
+            Email : email
+          }, function(error){
+            var i;
+            firebase.database().ref('cnt').once('value').then(function(snapshot){
+              i = snapshot.val();
+              i = i+1;
+              firebase.database().ref("xyz/" + i).set(userid, function(error){
+                firebase.database().ref("cnt").set(i);
+              });
+            })
+            showafterin();
           })
-          showafterin();
-        })
-        console.log(userid);
-        hidesignup();
-      }
-    })
+          console.log(userid);
+          hidesignup();
+        }
+      })
+    }
   })
 }
 
