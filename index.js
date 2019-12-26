@@ -202,6 +202,8 @@ function showafterin(){
   document.getElementById("last").style.margin = "auto";
   document.getElementById("allow").style.visibility = "hidden";
   document.getElementById("denydiv").style.visibility = "hidden";
+
+  document.getElementById("backer").style.visibility = "hidden";
   hidesignin();
   hidesignup();
   console.log("Closed Everyting")
