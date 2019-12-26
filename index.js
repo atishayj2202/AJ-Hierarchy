@@ -270,19 +270,29 @@ function showlist(){
     while(i <= ingt){
       firebase.database().ref('xyz/'+i).once('value').then(function(snapshot){
         xid = snapshot.val();
-        console.log(xid);
-        firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
-          data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID : " +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd><dd>UID : " + snapshot.child("Id").val() + "</dd>";
-          console.log(data);
-          document.getElementById("denylist").innerHTML = data;
-        });
+        if(xid != "Cancelled"){
+          console.log(xid);
+          firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
+            data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID : " +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd><dd>UID : " + snapshot.child("Id").val() + "</dd>";
+            console.log(data);
+            document.getElementById("denylist").innerHTML = data;
+          });
+        }
+        
       })
       i = i + 1;
     }
   })
+  i = 1;
   var deleteuserid = document.querySelector("#delet");
   deleteuserid.addEventListener('submit', (e)=>{
     e.preventDefault();
+    var del_id = deleteuserid["uid"].value;
+    while(i <= ingt){
+      firebase.database().ref('xyz/'+i).once('value').then(function(snapshot){
+        if(snapshot)
+      })
+    }
   })
 
 }
