@@ -215,9 +215,7 @@ function showafterin(){
   document.getElementById("last").style.padding = 10;
   document.getElementById("last").style.margin = "auto";
   document.getElementById("allow").style.visibility = "hidden";
-  document.getElementById("denydiv").style.visibility = "hidden";
-
-  document.getElementById("backer").style.visibility = "hidden";
+  hidelist();
   hidesignin();
   hidesignup();
   console.log("Closed Everyting")
@@ -249,10 +247,16 @@ function showafterin(){
   )
   return;
 }
+function hidelist(){
+  document.getElementById("denydiv").style.visibility = "hidden";
+  document.getElementById("backer").style.visibility = "hidden";
+  document.getElementById("delet").style.visibility = "hidden";
+}
 function showlist(){
   hideafterin();
   document.getElementById("denydiv").style.visibility = "visible";
   document.getElementById("backer").style.visibility = "visible";
+  document.getElementById("delet").style.visibility = "visible";
   document.getElementById("backer").addEventListener("click", showafterin);
   
   var data = "";
@@ -275,8 +279,12 @@ function showlist(){
       })
       i = i + 1;
     }
-    
   })
+  var deleteuserid = document.querySelector("delet");
+  deleteuserid.addEventListener('submit', (e)=>{
+    e.preventDefault();
+  })
+
 }
 
 document.getElementById("bin").addEventListener("click", showsupmem);
