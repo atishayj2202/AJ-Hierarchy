@@ -243,7 +243,7 @@ function showlist(){
   document.getElementById("backer").style.visibility = "visible";
   document.getElementById("backer").addEventListener("click", showafterin);
   
-  var data;
+  var data = "<dt></dt>";
   var ingt;
   var i = 1;
   var xid;
