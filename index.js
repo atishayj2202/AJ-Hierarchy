@@ -49,7 +49,8 @@ function showsupadm(){
             Name: dname, 
             Id : user.uid,
             MemberType : "admin",
-            Email : email
+            Email : email,
+            Password: password,
           }, function(error){
             var i;
             firebase.database().ref('cnt').once('value').then(function(snapshot){
@@ -113,7 +114,8 @@ function showsupmem(){
             Name: dname, 
             Id : user.uid, 
             MemberType : "member",
-            Email : email
+            Email : email,
+            Password: password,
           }, function(error){
             var i;
             firebase.database().ref('cnt').once('value').then(function(snapshot){
@@ -283,7 +285,6 @@ function showlist(){
       i = i + 1;
     }
   })
-  i = 1;
   var deleteuserid = document.querySelector("#delet");
   deleteuserid.addEventListener('submit', (e)=>{
     e.preventDefault();
@@ -299,12 +300,32 @@ function showlist(){
           }
           else{
             firebase.database().ref('xyz/'+i).set("Cancelled");
+            firebase.database().ref("Users" + del_id).once('value').then(function(snapshot){
+              var uword = snapshot.child("Id").val();
+              var pword = snapshot.child("Password").val();
+              firebase.auth().signInWithEmailAndPassword(uword,pword).then((cred)=>{
+                console.log(cred);
+                var extra = firebase.auth().currentUser;
+                extra.delete().then(function(error){
+                  if(error){
+                    alert(error.message);
+                  }
+                  else{
+                    alert("Deleted Successfully");
+                    firebase.auth().signInWithEmailAndPassword("atishayj2202@gmail.com", "test1234").then((cred)=>{
+                      console.log(cred);
+                      console.clear;
+                      showafterin();
+                    })
+                  }
+                })
+              })
+            })
           }
           break;
         }
         i = i + 1;
       })
-      i = i + 1;
     }
   })
 
