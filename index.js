@@ -305,10 +305,23 @@ function showlist(){
           alert("Invalid Id Entered");
         }
         else {
+          var ewordx = snapshot.child("Email").val();
+          var Pwordx = snapshot.child("Password").val();
           firebase.database().ref("Users/"+xid).set({
             MemberType : dissolved
           }, function(error){
-            
+            firebase.auth().signInWithEmailAndPassword(ewordx, Pwordx).then((cred)=>{
+              console.log(cred);
+              console.clear();
+              var extraid = firebase.auth().currentUser;
+              extraid.delete().then(function(){
+                alert("User Deleted Successfully");
+                firebase.auth().signInWithEmailAndPassword("atishayj2202@gmail.com", "test1234").then((cred)=>{
+                  console.log(cred);
+                  showafterin();
+                })
+              });
+            })
           })
         }
       }
