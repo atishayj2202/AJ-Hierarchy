@@ -294,40 +294,34 @@ function showlist(){
     var del_id = deleteuserid["uid"].value;
     console.log(del_id);
     firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
-      if(error){
-        alert(error.message);
+      if("super" == snapshot.child("MemberType").val()){
+        alert("Super Admin can't be deleted");
       }
-      else{
-        if("super" == snapshot.child("MemberType").val()){
-          alert("Super Admin can't be deleted");
-        }
-        else if(snapshot.child("Id").val() != del_id){
-          alert("Invalid Id Entered");
-        }
-        else {
-          var ewordx = snapshot.child("Email").val();
-          var Pwordx = snapshot.child("Password").val();
-          firebase.database().ref("Users/"+xid).set({
-            MemberType : dissolved
-          }, function(error){
-            firebase.auth().signInWithEmailAndPassword(ewordx, Pwordx).then((cred)=>{
-              console.log(cred);
-              console.clear();
-              var extraid = firebase.auth().currentUser;
-              extraid.delete().then(function(){
-                alert("User Deleted Successfully");
-                firebase.auth().signInWithEmailAndPassword("atishayj2202@gmail.com", "test1234").then((cred)=>{
-                  console.log(cred);
-                  showafterin();
-                })
-              });
-            })
+      else if(snapshot.child("Id").val() != del_id){
+        alert("Invalid Id Entered");
+      }
+      else {
+        var ewordx = snapshot.child("Email").val();
+        var Pwordx = snapshot.child("Password").val();
+        firebase.database().ref("Users/"+xid).set({
+          MemberType : dissolved
+        }, function(error){
+          firebase.auth().signInWithEmailAndPassword(ewordx, Pwordx).then((cred)=>{
+            console.log(cred);
+            console.clear();
+            var extraid = firebase.auth().currentUser;
+            extraid.delete().then(function(){
+              alert("User Deleted Successfully");
+              firebase.auth().signInWithEmailAndPassword("atishayj2202@gmail.com", "test1234").then((cred)=>{
+                console.log(cred);
+                showafterin();
+              })
+            });
           })
-        }
+        })
       }
-      
     })
-    })
+  })
 }
 
 document.getElementById("bin").addEventListener("click", showsupmem);
