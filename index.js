@@ -236,7 +236,7 @@ function showlist(){
   hideafterin();
   document.getElementById("denydiv").style.visibility = "visible";
   document.getElementById("backer").style.visibility = "visible";
-  document.getElementById("backer").addEventListener("click", );
+  document.getElementById("backer").addEventListener("click", showafterin);
   
   var data = null;
   var ingt;
