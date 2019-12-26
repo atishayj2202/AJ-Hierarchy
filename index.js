@@ -293,7 +293,7 @@ function showlist(){
     console.clear()
     var del_id = deleteuserid["uid"].value;
     console.log(del_id);
-    firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
+    firebase.database().ref("Users/"+del_id).once('value').then(function(snapshot){
       if("super" == snapshot.child("MemberType").val()){
         alert("Super Admin can't be deleted");
       }
@@ -303,12 +303,12 @@ function showlist(){
       else {
         var ewordx = snapshot.child("Email").val();
         var Pwordx = snapshot.child("Password").val();
-        firebase.database().ref("Users/"+xid).set({
-          MemberType : dissolved
+        console.log("In Hello");
+        firebase.database().ref("Users/"+ del_id).set({
+          MemberType : "dissolved"
         }, function(error){
           firebase.auth().signInWithEmailAndPassword(ewordx, Pwordx).then((cred)=>{
             console.log(cred);
-            console.clear();
             var extraid = firebase.auth().currentUser;
             extraid.delete().then(function(){
               alert("User Deleted Successfully");
