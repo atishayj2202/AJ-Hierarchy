@@ -43,7 +43,8 @@ function showsupadm(){
         firebase.database().ref("Users/"+userid).set({
           Name: dname, 
           Id : user.uid,
-          MemberType : "admin"
+          MemberType : "admin",
+          Email : email
         }, function(error){
           var i;
           firebase.database().ref('cnt').once('value').then(function(snapshot){
@@ -100,7 +101,8 @@ function showsupmem(){
         firebase.database().ref("Users/"+userid).set({
           Name: dname, 
           Id : user.uid, 
-          MemberType : "member"
+          MemberType : "member",
+          Email : email
         }, function(error){
           var i;
           firebase.database().ref('cnt').once('value').then(function(snapshot){
@@ -241,7 +243,7 @@ function showlist(){
   document.getElementById("backer").style.visibility = "visible";
   document.getElementById("backer").addEventListener("click", showafterin);
   
-  var data = null;
+  var data;
   var ingt;
   var i = 1;
   var xid;
