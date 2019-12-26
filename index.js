@@ -275,9 +275,11 @@ function showlist(){
         if(xid != "Cancelled"){
           console.log(xid);
           firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
-            data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID : " +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd><dd>UID : " + snapshot.child("Id").val() + "</dd>";
-            console.log(data);
-            document.getElementById("denylist").innerHTML = data;
+            if("dissolved" != snapshot.child("MemberType").val()){
+              data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID : " +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd><dd>UID : " + snapshot.child("Id").val() + "</dd>";
+              console.log(data);
+              document.getElementById("denylist").innerHTML = data;
+              }
           });
         }
         
@@ -291,44 +293,28 @@ function showlist(){
     console.clear()
     var del_id = deleteuserid["uid"].value;
     console.log(del_id);
-    i = 1;
-    while(i <= ingt){
-      firebase.database().ref('xyz/'+i).once('value').then(function(snapshot){
-        if(snapshot.val() == del_id){
-          if(i == 1){
-            alert("Super Id can't be Deleted");
-          }
-          else{
-            firebase.database().ref('xyz/'+i).set("Cancelled");
-            firebase.database().ref("Users" + del_id).once('value').then(function(snapshot){
-              var uword = snapshot.child("Id").val();
-              var pword = snapshot.child("Password").val();
-              firebase.auth().signInWithEmailAndPassword(uword,pword).then((cred)=>{
-                console.log(cred);
-                var extra = firebase.auth().currentUser;
-                extra.delete().then(function(error){
-                  if(error){
-                    alert(error.message);
-                  }
-                  else{
-                    alert("Deleted Successfully");
-                    firebase.auth().signInWithEmailAndPassword("atishayj2202@gmail.com", "test1234").then((cred)=>{
-                      console.log(cred);
-                      console.clear;
-                      showafterin();
-                    })
-                  }
-                })
-              })
-            })
-          }
-          break;
+    firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
+      if(error){
+        alert(error.message);
+      }
+      else{
+        if("super" == snapshot.child("MemberType").val()){
+          alert("Super Admin can't be deleted");
         }
-        i = i + 1;
-      })
-    }
-  })
-
+        else if(snapshot.child("Id").val() != del_id){
+          alert("Invalid Id Entered");
+        }
+        else {
+          firebase.database().ref("Users/"+xid).set({
+            MemberType : dissolved
+          }, function(error){
+            
+          })
+        }
+      }
+      
+    })
+    })
 }
 
 document.getElementById("bin").addEventListener("click", showsupmem);
