@@ -201,6 +201,7 @@ function showafterin(){
   document.getElementById("last").style.padding = 10;
   document.getElementById("last").style.margin = "auto";
   document.getElementById("allow").style.visibility = "hidden";
+  document.getElementById("denydiv").style.visibility = "hidden";
   hidesignin();
   hidesignup();
   console.log("Closed Everyting")
