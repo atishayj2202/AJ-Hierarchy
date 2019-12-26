@@ -256,7 +256,7 @@ function showlist(){
         xid = snapshot.val();
         console.log(xid);
         firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
-          data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID : " +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd><dd></dd>";
+          data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID : " +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd><dd>UID : " + snapshot.child("Id").val() + "</dd>";
           console.log(data);
           document.getElementById("denylist").innerHTML = data;
         });
