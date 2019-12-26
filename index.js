@@ -243,7 +243,7 @@ function showlist(){
   document.getElementById("backer").style.visibility = "visible";
   document.getElementById("backer").addEventListener("click", showafterin);
   
-  var data = "<dt></dt>";
+  var data = "<dt>List</dt>";
   var ingt;
   var i = 1;
   var xid;
@@ -258,11 +258,12 @@ function showlist(){
         firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
           data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID :" +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd>";
           console.log(data);
+          document.getElementById("denylist").innerHTML = data;
         });
       })
       i = i + 1;
     }
-    document.getElementById("denylist").innerHTML = data;
+    
   })
 }
 
