@@ -287,11 +287,24 @@ function showlist(){
   var deleteuserid = document.querySelector("#delet");
   deleteuserid.addEventListener('submit', (e)=>{
     e.preventDefault();
+    console.clear()
     var del_id = deleteuserid["uid"].value;
+    console.log(del_id);
+    i = 1;
     while(i <= ingt){
       firebase.database().ref('xyz/'+i).once('value').then(function(snapshot){
-        if(snapshot)
+        if(snapshot.val() == del_id){
+          if(i == 1){
+            alert("Super Id can't be Deleted");
+          }
+          else{
+            firebase.database().ref('xyz/'+i).set("Cancelled");
+          }
+          break;
+        }
+        i = i + 1;
       })
+      i = i + 1;
     }
   })
 
