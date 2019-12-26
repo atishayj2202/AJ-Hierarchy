@@ -245,13 +245,17 @@ function showlist(){
   var ingt;
   var i = 1;
   var xid;
+  console.clear();
   firebase.database().ref("cnt").once('value').then(function(snapshot){
     ingt = snapshot.val(); 
+    console.log(ingt)
     while(i <= ingt){
       firebase.database().ref('xyz/'+i).once('value').then(function(snapshot){
         xid = snapshot.val();
+        console.log(xid);
         firebase.database().ref("Users/"+xid).once('value').then(function(snapshot){
           data = data + "<dt>" + snapshot.child("Name").val() + "</dt><dd>ID :" +  snapshot.child("Email").val() + "</dd><dd>Member Type : " + snapshot.child("MemberType").val() + "</dd>";
+          console.log(data);
         });
       })
       i = i + 1;
